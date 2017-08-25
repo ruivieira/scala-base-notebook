@@ -40,6 +40,11 @@ RUN yum install -y curl wget java-headless bzip2 gnupg2 sqlite3 \
 			    jupyter \
     && pip install widgetsnbextension \
     && yum erase -y gcc gcc-c++ glibc-devel \
+    && curl -L -o /usr/local/bin/coursier https://raw.githubusercontent.com/alexarchambault/coursier/e70c32f/coursier \
+    && chmod +x /usr/local/bin/coursier \
+    && curl -L -o jupyter-scala  https://raw.githubusercontent.com/alexarchambault/jupyter-scala/18b507d/jupyter-scala \
+    && chmod +x jupyter-scala \
+    && bash jupyter-scala \
     && yum clean all -y \
     && rm -rf /root/.npm \
     && rm -rf /root/.cache \
@@ -51,14 +56,6 @@ RUN yum install -y curl wget java-headless bzip2 gnupg2 sqlite3 \
     && chown -R $NB_USER $CONDA_DIR \
     && conda remove --quiet --yes --force qt pyqt \
     && conda remove --quiet --yes --force --feature mkl ; conda clean -tipsy
-
-# Install Scala kernel for Jupyter
-RUN curl -L -o /usr/local/bin/coursier https://raw.githubusercontent.com/alexarchambault/coursier/e70c32f/coursier && \
-    chmod +x /usr/local/bin/coursier && \
-    curl -L -o jupyter-scala  https://raw.githubusercontent.com/alexarchambault/jupyter-scala/18b507d/jupyter-scala  && \
-    chmod +x jupyter-scala && \
-    ./jupyter-scala
-
 
 ENV PATH /opt/conda/bin:$PATH
 
