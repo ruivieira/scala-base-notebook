@@ -40,11 +40,8 @@ RUN yum install -y curl wget java-headless bzip2 gnupg2 sqlite3 \
 			    jupyter \
     && pip install widgetsnbextension \
     && yum erase -y gcc gcc-c++ glibc-devel \
-    && curl -L -o /usr/local/bin/coursier https://raw.githubusercontent.com/alexarchambault/coursier/e70c32f/coursier \
-    && chmod +x /usr/local/bin/coursier \
-    && curl -L -o jupyter-scala  https://raw.githubusercontent.com/alexarchambault/jupyter-scala/18b507d/jupyter-scala \
-    && chmod +x jupyter-scala \
-    && bash jupyter-scala \
+    && pip --no-cache-dir install https://dist.apache.org/repos/dist/dev/incubator/toree/0.2.0/snapshots/dev1/toree-pip/toree-0.2.0.dev1.tar.gz \
+    && jupyter toree install --sys-prefix \
     && yum clean all -y \
     && rm -rf /root/.npm \
     && rm -rf /root/.cache \
