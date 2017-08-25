@@ -10,4 +10,4 @@ if [[ -n "$JUPYTER_NOTEBOOK_X_INCLUDE" ]]; then
 fi
 
 export PYTHONPATH=$SPARK_HOME/python:$(echo $SPARK_HOME/python/lib/py4j-*-src.zip)
-exec jupyter notebook --kernel scala
+exec jupyter notebook
